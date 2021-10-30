@@ -1,0 +1,36 @@
+define
+	$data = data_device_2.csv
+	
+	$refLink = getVar -name ref_link
+	//$refLink = random -text "https://lnr.app/s/rABLJZ,https://lnr.app/s/gR24m2"
+	
+	
+	//$refLink =  "https://lnr.app/s/rABLJZ"
+
+	//$refLink = "https://lnr.app/s/gR24m2"
+	
+	//$refLink = "https://lnr.app/s/eGApmL"
+	
+	
+	$pk = org.bromite.bromite
+	$folder = lunarcrush
+	$sleep = sleep -t "random -from 1500 -to 2000"
+	$email = getVar -name email
+	$emailPass = getVar -name emailpass
+
+endDefine
+
+loop -i 1000000
+	var -name moon -value null
+	wait -template '/sdcard/coin.jpg' -timeout 10000 -then {swipe -startX 500 -startY 430 -endX 500 -endY 205 -time 300}
+	$sleep
+
+	wait -template '/sdcard/moon.jpg' -timeout 5000 -then {var -name moon -value true} -else {wait -template '/sdcard/coin.jpg' -timeout 5000 -thenClick true} -varPosX "centerMoonX" -varPosY "centerMoonY"
+	$sleep
+	if -getVar moon -equal true -then {wait -template '/sdcard/coin.jpg' -timeout 5000 -varPosStartX "centerCoinX" -varPosStartY "centerCoinY"}
+	$sleep
+	if -getVar moon -equal true -then {swipe -startX 'getVar -name centerCoinX' -startY 'getVar -name centerCoinY' -endX 'getVar -name centerMoonX' -endY 'getVar -name centerMoonY' -time 'random -from 600 -to 1000'}
+	$sleep
+	wait -template '/sdcard/coin.jpg' -timeout 4000 -thenClick true -else {click -x 500 -y 250}
+	$sleep
+endLoop
