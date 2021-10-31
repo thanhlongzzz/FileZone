@@ -85,7 +85,7 @@ sequence
 			
 			
 			//long100197
-			replace -text 'i <= 135' -replace 'i' -to 'getVar -name i' -var 'count1'
+			replace -text 'i <= 145' -replace 'i' -to 'getVar -name i' -var 'count1'
 			calc -math 'getVar -name count1' -var "rs1"
 			if -getVar rs1 -equal true -then {var -name ref_link -value 'random -text "https://lnr.app/s/m8yywB,https://lnr.app/s/M3A0Ye"'}
 			
