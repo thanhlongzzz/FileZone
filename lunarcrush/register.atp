@@ -1,7 +1,7 @@
 home
 
 define
-	$data = data_device_2.csv
+	$data = data.csv
 	
 	$refLink = getVar -name ref_link
 	//$refLink = random -text "https://lnr.app/s/rABLJZ,https://lnr.app/s/gR24m2"
@@ -61,11 +61,8 @@ loop -i 1000000000
 	var -name moon -value null
 	wait -template '/sdcard/coin.jpg' -timeout 10000 -then {swipe -startX 500 -startY 430 -endX 500 -endY 205 -time 300}
 	$sleep
-
 	wait -template '/sdcard/moon.jpg' -timeout 5000 -then {var -name moon -value true} -else {wait -template '/sdcard/coin.jpg' -timeout 5000 -thenClick true} -varPosX "centerMoonX" -varPosY "centerMoonY"
-	$sleep
-	if -getVar moon -equal true -then {wait -template '/sdcard/coin.jpg' -timeout 5000 -varPosStartX "centerCoinX" -varPosStartY "centerCoinY"} -else {loopContinue}
-	$sleep
+	if -getVar moon -equal true -then {wait -template '/sdcard/coin.jpg' -timeout 5000 -varPosX "centerCoinX" -varPosY "centerCoinY"} -else {loopContinue}
 	if -getVar moon -equal true -then {swipe -startX 'getVar -name centerCoinX' -startY 'getVar -name centerCoinY' -endX 'getVar -name centerMoonX' -endY 'getVar -name centerMoonY' -time 'random -from 600 -to 1000'}
 	$sleep
 	wait -template '/sdcard/coin.jpg' -timeout 4000 -thenClick true -else {click -x 500 -y 250}
@@ -75,16 +72,40 @@ endLoop
 
 sequence
 
-	if -getVar data -equal "data_device_1.csv" -then {var -name ref_link -value 'random -text "https://lnr.app/s/rABLJZ,https://lnr.app/s/m8yywB"'}
+	//if -getVar data -equal "data_device_1.csv" -then {var -name ref_link -value 'random -text "https://lnr.app/s/m8yywB,https://lnr.app/s/M3A0Ye"'}
 	
-	if -getVar data -equal "data_device_2.csv" -then {var -name ref_link -value 'random -text "https://lnr.app/s/gR24m2"'}
+	//if -getVar data -equal "data_device_2.csv" -then {var -name ref_link -value 'random -text "https://lnr.app/s/gR24m2"'}
 	
-	if -getVar data -equal "data_device_3.csv" -then {var -name ref_link -value 'random -text "https://lnr.app/s/4WVYww"'}
+	//if -getVar data -equal "data_device_3.csv" -then {var -name ref_link -value 'random -text "https://lnr.app/s/4WVYww"'}
 	
 	
-	if -file "/sdcard/AutoTouchPro/$data" -else {DownloadFile -url "https://github.com/thanhlongzzz/AutoTouchPro/raw/main/assets/lunarcrush/$data" -to "/sdcard/AutoTouchPro/$data"}
+	if -file "/sdcard/AutoTouchPro/$data" -else {DownloadFile -url "https://raw.githubusercontent.com/thanhlongzzz/FileZone/main/lunarcrush/$data" -to "/sdcard/AutoTouchPro/$data"}
 	loop -i 40
 		loop -inCsvData "/sdcard/AutoTouchPro/$data"
+			
+			
+			//long100197
+			replace -text 'i <= 135' -replace 'i' -to 'getVar -name i' -var 'count1'
+			calc -math 'getVar -name count1' -var "rs1"
+			if -getVar rs1 -equal true -then {var -name ref_link -value 'random -text "https://lnr.app/s/m8yywB,https://lnr.app/s/M3A0Ye"'}
+			
+			//longvipzzz
+			replace -text 'i <= 100' -replace 'i' -to 'getVar -name i' -var 'count1'
+			calc -math 'getVar -name count1' -var "rs1"
+			if -getVar rs1 -equal true -then {var -name ref_link -value 'random -text "https://lnr.app/s/gR24m2"'}
+			
+			
+			//m9x.mobi
+			replace -text 'i <= 67' -replace 'i' -to 'getVar -name i' -var 'count1'
+			calc -math 'getVar -name count1' -var "rs1"
+			if -getVar rs1 -equal true -then {var -name ref_link -value 'random -text "https://lnr.app/s/4WVYww"'}
+			
+			
+			//gameungdung.com
+			replace -text 'i <= 34' -replace 'i' -to 'getVar -name i' -var 'count1'
+			calc -math 'getVar -name count1' -var "rs1"
+			if -getVar rs1 -equal true -then {var -name ref_link -value 'random -text "https://lnr.app/s/LBZmvL"'}
+			
 			
 			if -getVar "status" -equal null -else {loopContinue}
 			replace -text 'getVar -name email' -replace '@' -to '_' -var 'namebackup'
@@ -183,17 +204,14 @@ sequence
 			wait -text 'Enter Email address' -exactly true -timeout 10000 -thenInput '$email'
 			$sleep
 			$sleep
-			$sleep
-			$sleep
 			wait -text 'Next ' -timeout 5000 -thenClick true
 			$sleep
 			$sleep
-			$sleep
-			$sleep
 			//toast -text 'Captcha' -sound true
-			sleep -t 15000
 			
-			wait -text 'Try again' -timeout 40000 -then {} -else {loopContinue}
+			wait -text 'Try again' -timeout 50000 -then {} -else {loopContinue}
+			
+			sleep -t 20000
 			
 			//wait -template '/sdcard/lunar_box.jpg' -timeout 15000 -thenClick true -clickDelay 1000
 			$sleep
@@ -228,10 +246,10 @@ sequence
 			
 			
 			var -name "code" -value "null"
-			loop -i 4
+			loop -i 20
 				//readMail -user "$email" -pass "$emailPass" -contain "LunarCrush Login Verification" -limit 3 -regex `>\W*(\w{6})\W*<\/span>` -groupPos 1 -var "code"
 				readMail -user "$email" -pass "$emailPass" -contain "LunarCrush Login Verification" -limit 3 -regex {<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1} -regexPos 1 -groupPos 2 -var "code"
-				if -getVar "code" -equal null -then {sleep -t 25000} -else {break}
+				if -getVar "code" -equal null -then {sleep -t 5000} -else {break}
 			endLoop
 			
 			replace -text 'getVar -name "code"' -replace '&amp;' -to '&' -var "code"
@@ -292,7 +310,7 @@ sequence
 			
 			sleep -t 5000
 			
-			//if -getVar isLogged -equal true -then {backupapp -p $pk -to $folder -name 'getVar -name namebackup'}
+			if -getVar isLogged -equal true -then {backupapp -p $pk -to $folder -name 'getVar -name namebackup'}
 			if -getVar isLogged -equal true -then {csvDataRow -col "status" -setText "success"}
 			
 			

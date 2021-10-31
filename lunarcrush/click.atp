@@ -10,11 +10,13 @@ define
 	
 	//$refLink = "https://lnr.app/s/Qm0wJZ"
 	
-	$refLink = random -text "https://lnr.app/s/m8yywB,https://lnr.app/s/gR24m2,https://lnr.app/s/eGApmL"
+	$refLink = random -text "https://lnr.app/s/m8yywB,https://lnr.app/s/gR24m2,https://lnr.app/s/eGApmL,https://lnr.app/s/LBZmvL"
 	
 	//$refLink = "https://lnr.app/s/gR24m2"
 	
 	//$refLink = "https://lnr.app/s/eGApmL"
+	
+	//$refLink = "https://lnr.app/s/LBZmvL"
 
 endDefine
 

@@ -2,11 +2,11 @@
   "mode": "reg",
   "downloadWhenClickRun": "false",
   "reg": {
-    "url": "https://github.com/thanhlongzzz/AutoTouchPro/raw/main/assets/lunarcrush/register.atp",
+    "url": "https://raw.githubusercontent.com/thanhlongzzz/FileZone/main/lunarcrush/register.atp",
     "filename": "register.atp"
   },
   "click": {
-    "url": "https://github.com/thanhlongzzz/AutoTouchPro/raw/main/assets/lunarcrush/click.atp",
+    "url": "https://raw.githubusercontent.com/thanhlongzzz/FileZone/main/lunarcrush/click.atp",
     "filename": "click.atp"
   },
   "loadFromFile": {
