@@ -83,6 +83,22 @@ sequence
 	loop -i 40
 		loop -inCsvData "/sdcard/AutoTouchPro/$data"
 			
+			//1,2,3,4
+			//var -name count -value 4
+
+			//replace -text '_i%_count' -replace '_i' -to 'getVar -name i' -var 'bt'
+			//replace -text 'getVar -name bt' -replace '_count' -to 'getVar -name count' -var 'bt'
+			//calc -math 'getVar -name bt' -var "num"
+			
+			//long100197
+			//if -getVar num -equal 0 -then {var -name ref_link -value 'random -text "https://lnr.app/s/m8yywB,https://lnr.app/s/M3A0Ye"'}
+			//longvipzzz
+			//if -getVar num -equal 1 -then {var -name ref_link -value 'random -text "https://lnr.app/s/gR24m2,https://lnr.app/s/8RaPe6"'}
+			//m9x.mobi
+			//if -getVar num -equal 2 -then {var -name ref_link -value 'random -text "https://lnr.app/s/4WVYww"'}
+			//gameungdung.com
+			//if -getVar num -equal 3 -then {var -name ref_link -value 'random -text "https://lnr.app/s/LBZmvL"'}
+			
 			
 			//long100197
 			replace -text 'i <= 145' -replace 'i' -to 'getVar -name i' -var 'count1'
@@ -292,8 +308,8 @@ sequence
 			wait -text 'line_1' -thenclick true -timeout 5000
 			
 			
-			var -name inputCode -value {input text _text}
-			replace -text 'getVar -name inputCode' -replace '_text' -to {random -text "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,k,s,t,u,b,v,y"} -var "inputCode"
+			//var -name inputCode -value {input text _text}
+			//replace -text 'getVar -name inputCode' -replace '_text' -to {random -text "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,k,s,t,u,b,v,y"} -var "inputCode"
 			
 			
 			
@@ -304,7 +320,9 @@ sequence
 			click -x 463 -y 460
 			$sleep
 			click -x 'random -from 208 -to 872' -y 'random -from 1337 -to 1666'
-			adbshell -su true -command {getVar -name inputCode}
+			$sleep
+			click -x 'random -from 208 -to 872' -y 'random -from 1337 -to 1666'
+			//adbshell -su true -command {getVar -name inputCode}
 			
 			
 			//wait -edittext '' -pos 1 -timeout 15000 -thenInput 'random -text "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,k,s,t,u,b,v,y"' -thenclick true
