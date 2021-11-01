@@ -84,44 +84,20 @@ sequence
 		loop -inCsvData "/sdcard/AutoTouchPro/$data"
 			
 			//1,2,3,4
-			//var -name count -value 4
+			var -name count -value 3
 
-			//replace -text '_i%_count' -replace '_i' -to 'getVar -name i' -var 'bt'
-			//replace -text 'getVar -name bt' -replace '_count' -to 'getVar -name count' -var 'bt'
-			//calc -math 'getVar -name bt' -var "num"
+			replace -text '_i%_count' -replace '_i' -to 'getVar -name i' -var 'bt'
+			replace -text 'getVar -name bt' -replace '_count' -to 'getVar -name count' -var 'bt'
+			calc -math 'getVar -name bt' -var "num"
 			
 			//long100197
-			//if -getVar num -equal '0.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/m8yywB,https://lnr.app/s/M3A0Ye"'}
+			if -getVar num -equal '0.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/m8yywB,https://lnr.app/s/M3A0Ye"'}
 			//longvipzzz
-			//if -getVar num -equal '1.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/gR24m2,https://lnr.app/s/8RaPe6"'}
+			if -getVar num -equal '1.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/gR24m2,https://lnr.app/s/8RaPe6"'}
 			//m9x.mobi
-			//if -getVar num -equal '2.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/4WVYww"'}
+			if -getVar num -equal '2.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/4WVYww"'}
 			//gameungdung.com
 			//if -getVar num -equal '3.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/LBZmvL"'}
-			
-			
-			//long100197
-			replace -text 'i <= 145' -replace 'i' -to 'getVar -name i' -var 'count1'
-			calc -math 'getVar -name count1' -var "rs1"
-			if -getVar rs1 -equal true -then {var -name ref_link -value 'random -text "https://lnr.app/s/m8yywB,https://lnr.app/s/M3A0Ye"'}
-			
-			//longvipzzz
-			replace -text 'i <= 100' -replace 'i' -to 'getVar -name i' -var 'count1'
-			calc -math 'getVar -name count1' -var "rs1"
-			if -getVar rs1 -equal true -then {var -name ref_link -value 'random -text "https://lnr.app/s/gR24m2"'}
-			
-			
-			//m9x.mobi
-			replace -text 'i <= 67' -replace 'i' -to 'getVar -name i' -var 'count1'
-			calc -math 'getVar -name count1' -var "rs1"
-			if -getVar rs1 -equal true -then {var -name ref_link -value 'random -text "https://lnr.app/s/4WVYww"'}
-			
-			
-			//gameungdung.com
-			replace -text 'i <= 34' -replace 'i' -to 'getVar -name i' -var 'count1'
-			calc -math 'getVar -name count1' -var "rs1"
-			if -getVar rs1 -equal true -then {var -name ref_link -value 'random -text "https://lnr.app/s/LBZmvL"'}
-			
 			
 			if -getVar "status" -equal null -else {loopContinue}
 			replace -text 'getVar -name email' -replace '@' -to '_' -var 'namebackup'
