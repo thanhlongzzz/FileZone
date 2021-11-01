@@ -84,7 +84,7 @@ sequence
 		loop -inCsvData "/sdcard/AutoTouchPro/$data"
 			
 			//1,2,3,4
-			var -name count -value 3
+			var -name count -value 4
 
 			replace -text '_i%_count' -replace '_i' -to 'getVar -name i' -var 'bt'
 			replace -text 'getVar -name bt' -replace '_count' -to 'getVar -name count' -var 'bt'
@@ -97,11 +97,11 @@ sequence
 			//m9x.mobi
 			if -getVar num -equal '2.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/4WVYww"'}
 			//gameungdung.com
-			//if -getVar num -equal '3.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/LBZmvL"'}
+			if -getVar num -equal '3.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/LBZmvL"'}
 			
-			toast -text 'getVar -name num'
+			toast -text 'getVar -name bt'
 			
-			if -getVar "status" -equal null -else {loopContinue}
+			if -getVar "status" -equal 'success' -then {loopContinue}
 			replace -text 'getVar -name email' -replace '@' -to '_' -var 'namebackup'
 			changeinfo
 			//clear data app, yêu cầu root
@@ -206,6 +206,8 @@ sequence
 			wait -text 'Try again' -timeout 50000 -then {} -else {loopContinue}
 			
 			sleep -t 20000
+			
+			if -getVar "status" -equal 'notLogin' -then {sleep -t 20000}
 			
 			//wait -template '/sdcard/lunar_box.jpg' -timeout 15000 -thenClick true -clickDelay 1000
 			$sleep

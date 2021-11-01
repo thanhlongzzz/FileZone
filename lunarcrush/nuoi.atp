@@ -97,7 +97,7 @@ sequence
 		swipe -orient up
 		$sleep
 		click -x 'random -from 400 -to 600' -y 'random -from 600 -to 900'
-		sleep -t 5000
+		sleep -t 2000
 		swipe -orient up
 		click -x 'random -from 400 -to 600' -y 'random -from 600 -to 900'
 		$sleep
