@@ -91,13 +91,13 @@ sequence
 			//calc -math 'getVar -name bt' -var "num"
 			
 			//long100197
-			//if -getVar num -equal 0 -then {var -name ref_link -value 'random -text "https://lnr.app/s/m8yywB,https://lnr.app/s/M3A0Ye"'}
+			//if -getVar num -equal '0.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/m8yywB,https://lnr.app/s/M3A0Ye"'}
 			//longvipzzz
-			//if -getVar num -equal 1 -then {var -name ref_link -value 'random -text "https://lnr.app/s/gR24m2,https://lnr.app/s/8RaPe6"'}
+			//if -getVar num -equal '1.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/gR24m2,https://lnr.app/s/8RaPe6"'}
 			//m9x.mobi
-			//if -getVar num -equal 2 -then {var -name ref_link -value 'random -text "https://lnr.app/s/4WVYww"'}
+			//if -getVar num -equal '2.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/4WVYww"'}
 			//gameungdung.com
-			//if -getVar num -equal 3 -then {var -name ref_link -value 'random -text "https://lnr.app/s/LBZmvL"'}
+			//if -getVar num -equal '3.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/LBZmvL"'}
 			
 			
 			//long100197
