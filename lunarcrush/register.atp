@@ -135,7 +135,7 @@ sequence
 			if -getVar "clear" -equal 1 -then {opennotification}
 			if -getVar "clear" -equal 1 -then {$sleep}
 			if -getVar "clear" -equal 1 -then {wait -text "Off - Airplane mode"  -timeout 20000 -thenclick true}
-			if -getVar "clear" -equal 1 -then {$sleep}
+			//if -getVar "clear" -equal 1 -then {$sleep}
 			if -getVar "clear" -equal 1 -then {wait -text "On - Airplane mode" -timeout 20000 -thenclick true}
 			if -getVar "clear" -equal 1 -then {$sleep}
 			if -getVar "clear" -equal 1 -then {home}
