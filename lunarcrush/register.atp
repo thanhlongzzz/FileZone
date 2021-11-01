@@ -292,7 +292,7 @@ sequence
 			wait -text 'line_1' -thenclick true -timeout 5000
 			
 			
-			wait -text 'Search to add coins (e.g. BTC or Bitcoin)' -exactly true -timeout 15000 -thenInput 'random -text "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,k,s,t,u,b,v,y"' -thenclick true
+			wait -edittext '' -pos 1 -timeout 15000 -thenInput 'random -text "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,k,s,t,u,b,v,y"' -thenclick true
 			//$sleep
 			//click -x 509 -y 1042
 			//$sleep
