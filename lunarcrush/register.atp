@@ -99,6 +99,8 @@ sequence
 			//gameungdung.com
 			//if -getVar num -equal '3.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/LBZmvL"'}
 			
+			toast -text 'getVar -name num'
+			
 			if -getVar "status" -equal null -else {loopContinue}
 			replace -text 'getVar -name email' -replace '@' -to '_' -var 'namebackup'
 			changeinfo
@@ -324,7 +326,7 @@ sequence
 			
 			wait -text 'Continue' -timeout 10000 -exactly true -thenClick true
 			
-			sleep -t 5000
+			//sleep -t 5000
 			
 			if -getVar isLogged -equal true -then {backupapp -p $pk -to $folder -name 'getVar -name namebackup'}
 			if -getVar isLogged -equal true -then {csvDataRow -col "status" -setText "success"}
