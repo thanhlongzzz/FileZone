@@ -293,7 +293,7 @@ sequence
 			
 			
 			var -name inputCode -value {input text _text}
-			replace -text 'getVar -name inputCode' -replace '_text' -to 'random -text "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,k,s,t,u,b,v,y"' -var "inputCode"
+			replace -text 'getVar -name inputCode' -replace '_text' -to {random -text 'random -text "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,k,s,t,u,b,v,y"'} -var "inputCode"
 			
 			
 			//wait -edittext -pos 1 -thenClick true
