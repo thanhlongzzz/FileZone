@@ -9,6 +9,10 @@
     "url": "https://raw.githubusercontent.com/thanhlongzzz/FileZone/main/lunarcrush/click.atp",
     "filename": "click.atp"
   },
+  "nuoi": {
+    "url": "https://raw.githubusercontent.com/thanhlongzzz/FileZone/main/lunarcrush/nuoi.atp",
+    "filename": "nuoi.atp"
+  },
   "loadFromFile": {
     "filename": "ref.txt"
   }
