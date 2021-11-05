@@ -1,0 +1,12 @@
+{
+  "mode": "reg",
+  "downloadWhenClickRun": "false",
+  "reg": {
+    "url": "https://raw.githubusercontent.com/thanhlongzzz/FileZone/main/learnnear/register.atp",
+    "filename": "register.atp"
+  },
+  "nuoi": {
+    "url": "https://raw.githubusercontent.com/thanhlongzzz/FileZone/main/learnnear/nuoi.atp",
+    "filename": "nuoi.atp"
+  }
+}

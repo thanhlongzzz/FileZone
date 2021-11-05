@@ -38,7 +38,7 @@ endDefine
 
 sequence
 		
-	loop -i 700
+	loop -i 30
 		home
 		
 		var -name count -value 4
@@ -48,11 +48,11 @@ sequence
 		calc -math 'getVar -name bt' -var "num"
 			
 		//long100197
-		if -getVar num -equal '0.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/m8yywB,https://lnr.app/s/M3A0Ye"'}
+		if -getVar num -equal '0.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/pgRZrb,https://lnr.app/s/wvAZ4L,https://lnr.app/s/m3w6KR"'}
 		//longvipzzz
 		if -getVar num -equal '1.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/gR24m2,https://lnr.app/s/8RaPe6"'}
 		//m9x.mobi
-		if -getVar num -equal '2.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/4WVYww"'}
+		if -getVar num -equal '2.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/PE1eyx,https://lnr.app/s/0NdvRV"'}
 		//gameungdung.com
 		if -getVar num -equal '3.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/LBZmvL"'}
 			

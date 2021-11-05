@@ -1,0 +1,6 @@
+backupapp -p org.bromite.bromite -to AutoTouchPro/learnnear/backup -name reambervr_hotmail.com
+
+sequence
+	//openDeepLink -p org.bromite.bromite -url {https://learnnear.club/?mref=thanhlongzzz.near%40learnnear.club}
+	//wait -text 'Tweet +4nLEARNs' -exactly true -timeout 20000 -plusX '-270' -thenClick true
+endSequence
