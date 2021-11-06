@@ -10,6 +10,26 @@ define
 	$emailPass = getVar -name emailpass
 endDefine
 
+loop -i 1000000
+	var -name check -value null
+	wait -text 'spamming' -timeout 30000 -then {var -name check -value true}
+	wait -edittext 'example@email.com' -exactly true -timeout 5000 -thenInput '$email'
+	$sleep
+	wait -edittext 'example@email.com' -exactly true -timeout 5000 -thenInput '$email' -then {swipe -orient up -time 200} -else {loopContinue}
+	$sleep
+	wait -text 'Continue' -exactly true -timeout 5000 -thenClick true  -clickDelay 500
+	$sleep
+	if -getVar check -equal null -then {loopContinue}
+	
+	var -name "code_2" -value "null"
+	loop -i 10
+		readMail -user "$email" -pass "$emailPass" -contain "NEAR Wallet security code" -limit 3 -regex `([0-9]{6})` -groupPos 1 -var "code_2"
+		if -getVar "code_2" -equal null -then {sleep -t 5000} -else {break}
+	endLoop
+	wait -edittext 'Verification Code' -exactly true -timeout 10000 -thenInput 'getVar -name code_2'
+	wait -text 'Verify & Continue' -exactly true -timeout 10000 -thenClick true -clickDelay 500 -then {sleep -t 20000}
+	
+endLoop
 
 sequence
 
@@ -29,13 +49,13 @@ sequence
 			//longvipzzz
 			if -getVar num -equal '1.0' -then {var -name ref_link -value 'random -text "https://learnnear.club/?mref=longvipzzz.near%40learnnear.club"'}
 			//m9x.mobi
-			if -getVar num -equal '2.0' -then {var -name ref_link -value 'random -text "https://learnnear.club/members/thanhlongzzz-near/profile/"'}
+			if -getVar num -equal '2.0' -then {var -name ref_link -value 'random -text "https://learnnear.club/?mref=thanhlongzzz.near%40learnnear.club"'}
 			//gameungdung.com
 			if -getVar num -equal '3.0' -then {var -name ref_link -value 'random -text "https://learnnear.club/?mref=longvipzzz.near%40learnnear.club"'}
 			
 			toast -text 'getVar -name bt'
 			
-			if -getVar "status" -equal 'success' -then {loopContinue}
+			if -getVar "status" -equal 'null' -else {loopContinue}
 			replace -text 'getVar -name email' -replace '@' -to '_' -var 'namebackup'
 			changeinfo
 			//clear data app, yêu cầu root
@@ -103,45 +123,63 @@ sequence
 			OpenDeepLink -p "$pk" -url {https://wallet.near.org/}
 			
 			wait -text 'Create Account' -exactly true -timeout 25000 -thenClick true -else {loopContinue} -clickDelay 1000
-			replace -text 'getVar -name namebackup' -replace '.' -to '_' -var 'wallet'
-			wait -text 'yourname.near' -exactly true -timeout 15000 -thenInput 'getVar -name wallet'
-			wait -text 'Reserve My Account ID' -exactly true -thenScroll true -timeout 10000 -thenClick true -clickDelay 500
-			swipe -orient up -time 200
-			wait -text 'example@email.com' -exactly true -timeout 10000 -thenInput '$email'
-			wait -text 'Continue' -exactly true -timeout 5000 -thenClick true  -clickDelay 500
+			replace -text 'getVar -name namebackup' -replace '\.' -to '_' -var 'wallet'
+			wait -text 'yourname.near' -exactly true -timeout 15000 -thenInput 'getVar -name wallet' -then {swipe -orient up -time 200}
+			wait -text 'Account ID is taken. Try something else.' -exactly true -timeout 5000 -then {csvDataRow -col "status" -setText "walletTaken"}
+			wait -text 'Account ID is taken. Try something else.' -exactly true -timeout 2000 -then {loopContinue}
+			wait -text 'Reserve My Account ID' -exactly true -thenScroll true -timeout 10000 -thenClick true -clickDelay 1000
 			
+			$sleep
+			$sleep
+			wait -text 'secure' -timeout 20000 -then {swipe -orient up -time 200}
+			$sleep
+			wait -text 'recovery link via email.' -timeout 10000 -thenClick true -clickDelay 1000
+			$sleep
+			wait -edittext 'example@email.com' -exactly true -timeout 10000 -thenInput '$email'
+			$sleep
+			wait -text 'Continue' -exactly true -timeout 5000 -thenClick true  -clickDelay 500
+			$sleep
 			var -name "code" -value "null"
 			loop -i 15
-				//readMail -user "$email" -pass "$emailPass" -contain "LunarCrush Login Verification" -limit 3 -regex `>\W*(\w{6})\W*<\/span>` -groupPos 1 -var "code"
-				readMail -user "$email" -pass "$emailPass" -contain "Near Wallet" -limit 3 -regex {([0-9]{6})<} -groupPos 1 -var "code"
-				if -getVar "code" -equal null -else `readMail -user "$email" -pass "$emailPass" -contain "Near Wallet" -limit 3 -regex {<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1} -regexPos 1 -groupPos 2 -var "recoverLink"`
+				readMail -user "$email" -pass "$emailPass" -contain "Near Wallet Recovery" -limit 3 -regex `([0-9]{6})` -groupPos 1 -var "code"
+				if -getVar "code" -equal null -else `readMail -user "$email" -pass "$emailPass" -contain "Near Wallet" -limit 3 -regex {(https:\/\/wallet\.near\.org/recover-with)(?:.*)} -var "recoverLink"`
 				if -getVar "code" -equal null -then {sleep -t 5000} -else {break}
 			endLoop
 			
 			wait -edittext 'Verification Code' -exactly true -timeout 10000 -thenInput 'getVar -name code'
 			
 			wait -text 'Verify & Continue' -exactly true -timeout 5000 -thenInput '' -thenClick true -clickDelay 500
+
+			var -name check2 -value null
+			wait -text 'code via email.' -timeout 10000 -thenClick true -clickDelay 1000 -then {var -name check2 -value true}
 			
-			wait -text '$0' -exactly true -timeout 10000 -then {csvDataRow -col "status" -setText "successWallet"} -else {csvDataRow -col "status" -setText "errorWallet"}
+			if -getVar check2 -then {wait -text '$0' -exactly true -timeout 50000}
+			var -name check3 -value null
+			if -getVar check2 -then `wait -text 'Bad Request' -exactly true -timeout 5000 -then {var -name check3 -value true}`
+			if -getVar check3 -then {OpenDeepLink -p "$pk" -url '$refLink'}
+			if -getVar check3 -then {sleep -t 7000}
+			if -getVar check3 -then {loopContinue}
+			
+			wait -text '$0' -exactly true -timeout 30000 -then {csvDataRow -col "status" -setText "successWallet"} -else {csvDataRow -col "status" -setText "errorWallet"}
 			wait -text '$0' -exactly true -timeout 10000 -else {loopContinue}
 			
 			OpenDeepLink -p "$pk" -url {$refLink}
 			$sleep
 			
 			
-			wait -text 'Login to (L)EARN' -exactly true -timeout 30000  -thenClick true -else {csvDataRow -col "status" -setText "notFoundLoginButton"}
+			wait -text 'Login to (L)EARN' -exactly true -timeout 30000 -thenClick true -clickDelay 1000 -else {csvDataRow -col "status" -setText "notFoundLoginButton"}
 			
 			wait -text 'getVar -name wallet' -timeout 10000
 			
-			wait -text 'Allow' -exactly true -timeout 10000 -thenInput '' -thenClick true -else {loopContinue} -clickDelay 1000
-			csvDataRow -col "status" -setText "alowed"
+			wait -text 'Allow' -exactly true -timeout 10000 -thenInput '' -thenClick true -else {loopContinue} -clickDelay 2000 -then {csvDataRow -col "status" -setText "alowed"}
+			
 			wait -text 'Main Menu' -exactly true -timeout 25000 -thenClick true -clickDelay 3000 -else {loopContinue}
 			
 			var -name "isLogged" -value null
 			
 			wait -text 'Logout' -exactly true -timeout 10000 -then {var -name "isLogged" -value true} -else {loopContinue}
 			
-			loop -i 'random -from 1 -to 3'
+			loop -i 'random -from 2 -to 4'
 				$sleep
 				wait -edittext '' -pos 0 -timeout 5000 -thenclick true -thenInput {random -text 'https://learnnear.club/courses/build-with-near/,https://learnnear.club/what-is-near-protocol/,https://learnnear.club/near-ethereum/,https://learnnear.club/near-ethereum/,https://learnnear.club/courses/build-with-near/,https://learnnear.club/near-protocol-and-solana/,https://learnnear.club/how-the-near-rainbow-bridge-works/,https://learnnear.club/near-sputnik-dao-empowering-communities/,https://learnnear.club/how-to-build-on-near-starting-guide/'}
 				$sleep
@@ -150,7 +188,9 @@ sequence
 				$sleep
 				$sleep
 				$sleep
+				adbshell -su true -command {input swipe 550 1500 560 290 300}
 				$sleep
+				adbshell -su true -command {input swipe 550 1500 560 290 300}
 				$sleep
 			endLoop
 			

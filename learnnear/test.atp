@@ -1,6 +1,19 @@
-backupapp -p org.bromite.bromite -to AutoTouchPro/learnnear/backup -name reambervr_hotmail.com
+//backupapp -p org.bromite.bromite -to AutoTouchPro/learnnear/backup -name reambervr_hotmail.com
 
 sequence
 	//openDeepLink -p org.bromite.bromite -url {https://learnnear.club/?mref=thanhlongzzz.near%40learnnear.club}
 	//wait -text 'Tweet +4nLEARNs' -exactly true -timeout 20000 -plusX '-270' -thenClick true
+	
+	loop -i 1000000
+		
+		wait -text 'code via email.' -timeout 20000
+		$sleep
+		wait -edittext 'example@email.com' -exactly true -timeout 5000 -thenInput '$email' -then {swipe -orient up -time 200} -else {loopContinue}
+		$sleep
+		var -name check -value null
+		wait -text 'Continue' -exactly true -timeout 5000 -thenClick true  -clickDelay 500 -then {var -name check -value true}
+		$sleep
+		if -getVar check -equal null -then {loopContinue}
+
+	endLoop
 endSequence
