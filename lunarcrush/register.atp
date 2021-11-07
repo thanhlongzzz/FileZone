@@ -72,7 +72,7 @@ endLoop
 
 sequence
 
-	//if -getVar data -equal "data_device_1.csv" -then {var -name ref_link -value 'random -text "https://lnr.app/s/m8yywB,https://lnr.app/s/M3A0Ye"'}
+	//if -getVar data -equal "data_device_1.csv" -then {var -name ref_link -value 'random -text "https://lnr.app/s/Dl0BGn,https://lnr.app/s/m8yywB,https://lnr.app/s/M3A0Ye"'}
 	
 	//if -getVar data -equal "data_device_2.csv" -then {var -name ref_link -value 'random -text "https://lnr.app/s/gR24m2"'}
 	
@@ -91,7 +91,7 @@ sequence
 			calc -math 'getVar -name bt' -var "num"
 			
 			//long100197
-			if -getVar num -equal '0.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/m8yywB,https://lnr.app/s/M3A0Ye"'}
+			if -getVar num -equal '0.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/m6nagR,https://lnr.app/s/M3A0Ye"'}
 			//longvipzzz
 			if -getVar num -equal '1.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/gR24m2,https://lnr.app/s/8RaPe6"'}
 			//m9x.mobi
@@ -278,14 +278,14 @@ sequence
 			wait -text 'Continue' -timeout 10000 -exactly true -thenClick true -then {var -name "isLogged" -value true}
 			
 			if -getVar isLogged -equal null -then {csvDataRow -col "status" -setText "notLogin"}
-			
+			if -getVar isLogged -equal null -then {loopContinue}
 			wait -text 'Add cryptocurrency holdings' -exactly true -timeout 15000 -thenClick true -else {loopContinue}
 			$sleep
 			
 			$sleep
-			wait -edittext '' -pos 0 -timeout 5000 -thenclick true
-			$sleep
-			wait -text 'line_1' -thenclick true -timeout 5000
+			//wait -edittext '' -pos 0 -timeout 5000 -thenclick true
+			//$sleep
+			//wait -text 'line_1' -thenclick true -timeout 5000
 			
 			
 			//var -name inputCode -value {input text _text}

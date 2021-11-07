@@ -19,6 +19,28 @@ loop -i 1000000
 	$sleep
 	wait -text 'Continue' -exactly true -timeout 5000 -thenClick true  -clickDelay 500
 	$sleep
+	
+	var -name check4 -value null
+	wait -text 'got it' -timeout 10000 -thenClick true -clickDelay 1000 -then {var -name check4 -value true}
+	if -getVar check4 -equal true -then {wait -edittext '' -pos 0 -timeout 5000 -thenclick true -thenInput 'getVar -name recoverLink'}
+	
+	if -getVar check4 -equal true -then {wait -text 'line_1' -thenclick true -timeout 5000}
+	
+	if -getVar check4 -equal true -then {wait -text Continue -timeout 20000 -exactly true -thenClick true -clickDelay 1000 -then 'sleep -t 5000'}
+	if -getVar check4 -equal true -then {click -x 556 -y 1008}
+	if -getVar check4 -equal true -then {wait -text Continue -timeout 8000 -exactly true -thenClick true -clickDelay 1000 -then 'sleep -t 2000'}
+	if -getVar check4 -equal true -then {wait -text 'Release' -timeout 5000 -then 'click -x 1000 -y 300'}
+	if -getVar check4 -equal true -then {wait -text '$0' -exactly true -timeout 5000}
+	if -getVar check4 -equal true -then `OpenDeepLink -p "$pk" -url {$refLink}`
+	if -getVar check4 -equal true -then `wait -text 'Login to (L)EARN' -exactly true -timeout 35000 -thenClick true -clickDelay 1000 -else {csvDataRow -col "status" -setText "notFoundLoginButton"}`
+	//if -getVar check4 -equal true -then ``
+	//if -getVar check4 -equal true -then ``
+	
+	
+			
+			
+			
+	
 	if -getVar check -equal null -then {loopContinue}
 	
 	var -name "code_2" -value "null"
@@ -29,8 +51,18 @@ loop -i 1000000
 	wait -edittext 'Verification Code' -exactly true -timeout 10000 -thenInput 'getVar -name code_2'
 	wait -text 'Verify & Continue' -exactly true -timeout 10000 -thenClick true -clickDelay 500 -then {sleep -t 20000}
 	
+	
 endLoop
 
+loop -i 10000000
+	wait -text 'Allow' -exactly true -timeout 40000 -thenInput '' -thenClick true -clickDelay 3000
+	$sleep
+	$sleep
+	$sleep
+	$sleep
+	$sleep
+	$sleep
+endLoop
 sequence
 
 	if -file "/sdcard/AutoTouchPro/$folder/$data" -else {DownloadFile -url "https://raw.githubusercontent.com/thanhlongzzz/FileZone/main/$folder/$data" -to "/sdcard/AutoTouchPro/$folder/$data"}
@@ -38,7 +70,7 @@ sequence
 		loop -inCsvData "/sdcard/AutoTouchPro/$folder/$data"
 			
 			//1,2,3,4
-			var -name count -value 2
+			var -name count -value 3
 
 			replace -text '_i%_count' -replace '_i' -to 'getVar -name i' -var 'bt'
 			replace -text 'getVar -name bt' -replace '_count' -to 'getVar -name count' -var 'bt'
@@ -49,9 +81,9 @@ sequence
 			//longvipzzz
 			if -getVar num -equal '1.0' -then {var -name ref_link -value 'random -text "https://learnnear.club/?mref=longvipzzz.near%40learnnear.club"'}
 			//m9x.mobi
-			if -getVar num -equal '2.0' -then {var -name ref_link -value 'random -text "https://learnnear.club/?mref=thanhlongzzz.near%40learnnear.club"'}
+			if -getVar num -equal '2.0' -then {var -name ref_link -value 'random -text "https://learnnear.club/?mref=m9x.near%40learnnear.club"'}
 			//gameungdung.com
-			if -getVar num -equal '3.0' -then {var -name ref_link -value 'random -text "https://learnnear.club/?mref=longvipzzz.near%40learnnear.club"'}
+			if -getVar num -equal '3.0' -then {var -name ref_link -value 'random -text "https://learnnear.club/?mref=gameungdung.near%40learnnear.club"'}
 			
 			toast -text 'getVar -name bt'
 			
@@ -119,11 +151,20 @@ sequence
 			//wait -text 'line_1' -thenclick true -timeout 5000
 			
 			
+			OpenDeepLink -p "$pk" -url {$refLink}
 			
-			OpenDeepLink -p "$pk" -url {https://wallet.near.org/}
+			wait -text 'Login to (L)EARN' -exactly true -timeout 35000 -thenClick true -clickDelay 1000 -else {csvDataRow -col "status" -setText "notFoundLoginButton"}
+			
+			
+			//OpenDeepLink -p "$pk" -url {https://wallet.near.org/}
 			
 			wait -text 'Create Account' -exactly true -timeout 25000 -thenClick true -else {loopContinue} -clickDelay 1000
-			replace -text 'getVar -name namebackup' -replace '\.' -to '_' -var 'wallet'
+			replace -text 'getVar -name namebackup' -replace '\.' -to '' -var 'wallet'
+			replace -text 'getVar -name wallet' -replace 'hotmail' -to '' -var 'wallet'
+			replace -text 'getVar -name wallet' -replace '_' -to '' -var 'wallet'
+			replace -text 'getVar -name wallet' -replace 'outlook' -to 'random -text "b,c,d,e,f,g,h,j,k,l,m,l,o,p,q,t,z"' -var 'wallet'
+			replace -text 'getVar -name wallet' -replace 'com' -to 'random -text "a,e,j,i,o,u"' -var 'wallet'
+			
 			wait -text 'yourname.near' -exactly true -timeout 15000 -thenInput 'getVar -name wallet' -then {swipe -orient up -time 200}
 			wait -text 'Account ID is taken. Try something else.' -exactly true -timeout 5000 -then {csvDataRow -col "status" -setText "walletTaken"}
 			wait -text 'Account ID is taken. Try something else.' -exactly true -timeout 2000 -then {loopContinue}
@@ -145,35 +186,41 @@ sequence
 				if -getVar "code" -equal null -else `readMail -user "$email" -pass "$emailPass" -contain "Near Wallet" -limit 3 -regex {(https:\/\/wallet\.near\.org/recover-with)(?:.*)} -var "recoverLink"`
 				if -getVar "code" -equal null -then {sleep -t 5000} -else {break}
 			endLoop
-			
+			if -getVar "code" -equal null -then {csvDataRow -col "status" -setText "codeNotReceive"}
+			if -getVar "code" -equal null -then {loopContinue}
 			wait -edittext 'Verification Code' -exactly true -timeout 10000 -thenInput 'getVar -name code'
 			
 			wait -text 'Verify & Continue' -exactly true -timeout 5000 -thenInput '' -thenClick true -clickDelay 500
-
+			
+			//wait -text 'learnnear.club is requesting to access your account.' -exactly true -timeout 10000 -then {var -name check1 -value null}
+			
 			var -name check2 -value null
-			wait -text 'code via email.' -timeout 10000 -thenClick true -clickDelay 1000 -then {var -name check2 -value true}
+			wait -text 'code via email.' -timeout 30000 -thenClick true -clickDelay 1000 -then {var -name check2 -value true}
 			
-			if -getVar check2 -then {wait -text '$0' -exactly true -timeout 50000}
-			var -name check3 -value null
-			if -getVar check2 -then `wait -text 'Bad Request' -exactly true -timeout 5000 -then {var -name check3 -value true}`
-			if -getVar check3 -then {OpenDeepLink -p "$pk" -url '$refLink'}
-			if -getVar check3 -then {sleep -t 7000}
-			if -getVar check3 -then {loopContinue}
+			if -getVar check2 -equal true -then `wait -text 'Invalid reCAPTCHA code; try again!' -exactly true -timeout 15000 -then {loopContinue}`
 			
-			wait -text '$0' -exactly true -timeout 30000 -then {csvDataRow -col "status" -setText "successWallet"} -else {csvDataRow -col "status" -setText "errorWallet"}
-			wait -text '$0' -exactly true -timeout 10000 -else {loopContinue}
-			
-			OpenDeepLink -p "$pk" -url {$refLink}
-			$sleep
+			if -getVar check2 -equal true -then {wait -text 'learnnear.club is requesting to access your account.' -timeout 40000}
 			
 			
-			wait -text 'Login to (L)EARN' -exactly true -timeout 30000 -thenClick true -clickDelay 1000 -else {csvDataRow -col "status" -setText "notFoundLoginButton"}
 			
-			wait -text 'getVar -name wallet' -timeout 10000
+			//if -getVar check2 -then {wait -text '$0' -exactly true -timeout 50000}
+			//var -name check3 -value null
+			//if -getVar check2 -then `wait -text 'Bad Request' -exactly true -timeout 5000 -then {var -name check3 -value true}`
+			//if -getVar check3 -then {OpenDeepLink -p "$pk" -url '$refLink'}
+			//if -getVar check3 -then {sleep -t 7000}
+			//if -getVar check3 -then {loopContinue}
+			//wait -text '$0' -exactly true -timeout 50000 -then {csvDataRow -col "status" -setText "successWallet"} -else {csvDataRow -col "status" -setText "errorWallet"}
+			//wait -text '$0' -exactly true -timeout 10000 -else {loopContinue}
 			
-			wait -text 'Allow' -exactly true -timeout 10000 -thenInput '' -thenClick true -else {loopContinue} -clickDelay 2000 -then {csvDataRow -col "status" -setText "alowed"}
 			
-			wait -text 'Main Menu' -exactly true -timeout 25000 -thenClick true -clickDelay 3000 -else {loopContinue}
+		
+			wait -text 'learnnear.club is requesting to access your account.' -timeout 30000 -then {csvDataRow -col "status" -setText "alowing"}
+			
+			//wait -text 'Allow' -exactly true -timeout 20000 -thenInput '' -thenClick true -else {loopContinue} -clickDelay 2000 -then {csvDataRow -col "status" -setText "alowed"}
+			
+			wait -text 'transaction' -timeout 10000 -then {wait -text 'Allow' -exactly true -timeout 10000 -clickDelay 1000 -thenClick true}
+			
+			wait -text 'Main Menu' -exactly true -timeout 45000 -thenClick true -clickDelay 3000 -else {loopContinue}
 			
 			var -name "isLogged" -value null
 			

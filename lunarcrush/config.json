@@ -1,6 +1,11 @@
 {
   "mode": "reg",
   "downloadWhenClickRun": "false",
+
+  "regnear": {
+	"url": "https://raw.githubusercontent.com/thanhlongzzz/FileZone/main/learnnear/register.atp",
+	"filename": "learnnear/register.atp"
+	},
   "reg": {
     "url": "https://raw.githubusercontent.com/thanhlongzzz/FileZone/main/lunarcrush/register.atp",
     "filename": "register.atp"
@@ -12,6 +17,10 @@
   "nuoi": {
     "url": "https://raw.githubusercontent.com/thanhlongzzz/FileZone/main/lunarcrush/nuoi.atp",
     "filename": "nuoi.atp"
+  },
+   "nuoinear": {
+    "url": "https://raw.githubusercontent.com/thanhlongzzz/FileZone/main/learnnear/nuoi.atp",
+    "filename": "learnnear/nuoi.atp"
   },
   "loadFromFile": {
     "filename": "ref.txt"

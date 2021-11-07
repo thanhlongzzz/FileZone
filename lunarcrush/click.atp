@@ -38,7 +38,7 @@ endDefine
 
 sequence
 		
-	loop -i 30
+	loop -i 250
 		home
 		
 		var -name count -value 4
@@ -48,11 +48,11 @@ sequence
 		calc -math 'getVar -name bt' -var "num"
 			
 		//long100197
-		if -getVar num -equal '0.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/pgRZrb,https://lnr.app/s/wvAZ4L,https://lnr.app/s/m3w6KR"'}
+		if -getVar num -equal '0.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/m6nagR,https://lnr.app/s/M3A0Ye"'}
 		//longvipzzz
 		if -getVar num -equal '1.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/gR24m2,https://lnr.app/s/8RaPe6"'}
 		//m9x.mobi
-		if -getVar num -equal '2.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/PE1eyx,https://lnr.app/s/0NdvRV"'}
+		if -getVar num -equal '2.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/0NdvRV,https://lnr.app/s/a477gr"'}
 		//gameungdung.com
 		if -getVar num -equal '3.0' -then {var -name ref_link -value 'random -text "https://lnr.app/s/LBZmvL"'}
 			
@@ -116,11 +116,11 @@ sequence
 		sleep -t 10000
 		//OpenDeepLink -p "$pk" -url {$refLink}
 		$sleep
-		loop -i 4
+		loop -i 2
 			if -text 'Log In / Register' -exactly true -timeout 10000 -else {wait -text 'Try again' -timeout 10000 -thenclick true}
 			if -text 'Log In / Register' -exactly true -timeout 3000 -thenClick true -then {break}
 		endLoop
-		sleep -t 7000
+		sleep -t 5000
 	endLoop
 	
 	toast -text "Ended email. Please add new mail" -sound true
