@@ -12,7 +12,7 @@ endDefine
 
 loop -i 1000000
 	var -name check -value null
-	wait -text 'spamming' -timeout 30000 -then {var -name check -value true}
+	wait -text 'spamming' -timeout 20000 -then {var -name check -value true}
 	wait -edittext 'example@email.com' -exactly true -timeout 5000 -thenInput '$email'
 	$sleep
 	wait -edittext 'example@email.com' -exactly true -timeout 5000 -thenInput '$email' -then {swipe -orient up -time 200} -else {loopContinue}
