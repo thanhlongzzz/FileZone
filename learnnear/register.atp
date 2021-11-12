@@ -70,7 +70,7 @@ sequence
 		loop -inCsvData "/sdcard/AutoTouchPro/$folder/$data"
 			
 			//1,2,3,4
-			var -name count -value 3
+			var -name count -value 5
 
 			replace -text '_i%_count' -replace '_i' -to 'getVar -name i' -var 'bt'
 			replace -text 'getVar -name bt' -replace '_count' -to 'getVar -name count' -var 'bt'
@@ -84,6 +84,8 @@ sequence
 			if -getVar num -equal '2.0' -then {var -name ref_link -value 'random -text "https://learnnear.club/?mref=m9x.near%40learnnear.club"'}
 			//gameungdung.com
 			if -getVar num -equal '3.0' -then {var -name ref_link -value 'random -text "https://learnnear.club/?mref=gameungdung.near%40learnnear.club"'}
+			//lienhchy
+			if -getVar num -equal '4.0' -then {var -name ref_link -value 'random -text "https://learnnear.club/?mref=lienhchy.near%40learnnear.club"'}
 			
 			toast -text 'getVar -name bt'
 			
