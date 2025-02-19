@@ -1,0 +1,102 @@
+define
+	$sleep = sleep -t  'random -from 1000 -to 1500'
+    $scrollUp = swipe -orient up -time "random -from 250 -to 1000"
+endDefine
+
+loop -i 100000
+    wait -text 'Verify you are human' -exactly true -timeout 5000 -thenClick true -plusX 'random -from 1 -to 10' -plusY 'random -from 1 -to 10' -else {sleep -t 3000}
+endLoop
+
+loop -i 100000
+    wait -text 'Xác minh bạn là con người' -timeout 5000 -thenClick true -plusX 'random -from 1 -to 10' -plusY 'random -from 1 -to 10' -else {sleep -t 3000}
+endLoop
+
+
+loop -i 100000
+    wait -text 'Ok' -exactly true -timeout 5000 -thenClick true -else {sleep -t 5000}
+endLoop
+
+Sequence
+    loop -i 1
+        var -name url -value 'https://dexscreener.com/solana/9dirurpjnanzhn6ts5hglouhtjrt1jgspbxnycrfz2ad'
+        var -name target1 -value 9890
+        var -name target2 -value 695
+        var -name target3 -value 4965
+        var -name target4 -value 2260
+        
+        var -name loaddone -value false
+        var -name number1 -value null
+        var -name number2 -value null
+        var -name number3 -value null
+        var -name number4 -value null
+
+        
+        openapp -p com.kiwibrowser.browser
+        $sleep
+        //wait -id 'com.kiwibrowser.browser:id/menu_button' -thenClick true -timeout 5000
+        //$sleep
+        //wait -id 'com.kiwibrowser.browser:id/new_tab_menu_id' -thenClick true -timeout 5000
+        
+        wait -id 'com.kiwibrowser.browser:id/url_bar' -thenClick true -timeout 5000 -thenInput 'getVar -name url' -else {wait -id 'com.kiwibrowser.browser:id/new_tab_view_desc' -timeout 2000 -thenClick true -then `wait -id 'com.kiwibrowser.browser:id/url_bar' -thenClick true -timeout 5000 -clickDelay 1000 -thenInput 'getVar -name url'`}
+        $sleep
+        wait -id 'com.kiwibrowser.browser:id/url_bar' -thenClick true -timeout 5000 -plusY 150 -else {wait -id 'line_2' -pos 0 -timeout 5000 -thenClick true}
+        
+        $sleep
+        $sleep
+        $sleep
+        $sleep
+        $sleep
+
+
+
+        loop -i 1
+
+            $sleep
+
+            change IP
+            openNotification
+            $sleep
+            wait -text 'Wi-fi,Bật' -timeout 5000 -thenClick true -then 'sleep -t 7000' -varPosX x -varPosY y -else {wait -text 'Wi-Fi,On' -timeout 5000 -thenClick true -then 'sleep -t 7000' -varPosX x -varPosY y}
+            $sleep
+            wait -text 'Wi-fi,Tắt' -timeout 5000 -thenClick true -then 'sleep -t 8000' -else {click -x 'getVar -name x' -y 'getVar -name y'} -clickDelay 3000
+            $sleep
+            back
+            sleep -t 10000
+            $sleep
+            wait -id 'com.kiwibrowser.browser:id/menu_button' -thenClick true -timeout 5000 -then {wait -text 'Làm mới' -exactly true -timeout 5000 -thenClick true -clickDelay 2000 -else `wait -text  'Refresh' -exactly true -timeout 5000 -thenClick true -clickDelay 2000`}
+            $sleep
+            $sleep
+            $sleep
+            $sleep
+        endLoop
+
+        //wait -text "Tztool1" -exactly true -timeout 15000 -else {$scrollUp}
+        $sleep
+        //wait -text "Tztool1" -exactly true -timeout 5000 -else {$scrollUp}
+
+        //loop -i 4
+
+            //$sleep
+        //endLoop
+        
+        wait -text "Tztool1" -timeout 5000 -varText number1 -then {var -name loaddone -value true}
+        if -getVar loaddone -equal false -then {loopContinue}
+        wait -text "Tztool1" -exactly true -timeout 3000 -varText number1
+        wait -text "Tztool2" -exactly true -timeout 3000 -varText number2
+        wait -text "Tztool3" -exactly true -timeout 3000 -varText number3
+        wait -text "Tztool4" -exactly true -timeout 3000 -varText number4
+        //calc -math '${target1}'
+
+        toast -text '${number1}, ${number2}, ${number3}, ${number4}'
+
+        wait -text "Tztool1" -exactly true -timeout 3000 -varText number1 -thenClick true
+        sleep -t 5000
+
+        wait -text 'Xác minh bạn là con người' -timeout 10000 -thenClick true -plusX 'random -from 1 -to 10' -plusY 'random -from 1 -to 10'
+        wait -text 'Verify you are human' -exactly true -timeout 5000 -thenClick true -plusX 'random -from 1 -to 10' -plusY 'random -from 1 -to 10'
+
+        wait -text "Tztool1" -exactly true -timeout 3000 -varText number11
+        toast -text '${number11}'
+    endloop
+
+endSequence
