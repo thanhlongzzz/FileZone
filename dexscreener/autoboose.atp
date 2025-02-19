@@ -92,7 +92,7 @@ Sequence
         wait -text "Tztool1" -exactly true -timeout 3000 -varText number1 -thenClick true
         sleep -t 5000
 
-        wait -text 'Xác minh bạn là con người' -timeout 10000 -thenClick true -plusX 'random -from 1 -to 10' -plusY 'random -from 1 -to 10'
+        wait -text 'Xác minh bạn là con người' -timeout 20000 -thenClick true -plusX 'random -from 1 -to 10' -plusY 'random -from 1 -to 10'
         wait -text 'Verify you are human' -exactly true -timeout 5000 -thenClick true -plusX 'random -from 1 -to 10' -plusY 'random -from 1 -to 10'
 
         wait -text "Tztool1" -exactly true -timeout 3000 -varText number11
