@@ -4,20 +4,26 @@ define
 endDefine
 
 loop -i 100000
-    wait -text 'Verify you are human' -exactly true -timeout 5000 -thenClick true -plusX 'random -from 1 -to 10' -plusY 'random -from 1 -to 10' -else {sleep -t 3000}
+    wait -text 'Verify you are human' -exactly true -timeout 5000 -thenClick true -plusX 'random -from 1 -to 7' -plusY 'random -from 1 -to 7' -clickDelay 500
+    sleep -t 2000
+    $sleep
 endLoop
 
 loop -i 100000
-    wait -text 'Xác minh bạn là con người' -timeout 5000 -thenClick true -plusX 'random -from 1 -to 10' -plusY 'random -from 1 -to 10' -else {sleep -t 3000}
+    wait -text 'Xác minh bạn là con người' -exactly true -timeout 5000 -thenClick true -plusX 'random -from 1 -to 7' -plusY 'random -from 1 -to 7' -clickDelay 500
+    sleep -t 2000
+    $sleep
 endLoop
 
 
 loop -i 100000
-    wait -text 'Ok' -exactly true -timeout 5000 -thenClick true -else {sleep -t 5000}
+    wait -text 'Ok' -exactly true -timeout 5000 -thenClick true
+    sleep -t 3000
 endLoop
 
 Sequence
-    loop -i 1
+    loop -i 2
+        toast -text "start tool"
         var -name url -value 'https://dexscreener.com/solana/9dirurpjnanzhn6ts5hglouhtjrt1jgspbxnycrfz2ad'
         var -name target1 -value 9890
         var -name target2 -value 695
@@ -29,8 +35,27 @@ Sequence
         var -name number2 -value null
         var -name number3 -value null
         var -name number4 -value null
-
         
+        
+
+
+        loop -i 1
+
+            $sleep
+
+            change IP
+            openNotification
+            $sleep
+            wait -text 'Wi-fi,Bật' -timeout 5000 -thenClick true -varPosX x -varPosY y -else {wait -text 'Wi-Fi,On' -timeout 5000 -thenClick true -varPosX x -varPosY y}
+            $sleep
+            wait -text 'Wi-fi,Tắt' -timeout 5000 -thenClick true -then 'sleep -t 8000' -else {click -x 'getVar -name x' -y 'getVar -name y'}
+            $sleep
+            back
+            sleep -t 10000
+            $sleep
+        endLoop
+
+
         openapp -p com.kiwibrowser.browser
         $sleep
         //wait -id 'com.kiwibrowser.browser:id/menu_button' -thenClick true -timeout 5000
@@ -44,31 +69,8 @@ Sequence
         $sleep
         $sleep
         $sleep
-        $sleep
-        $sleep
 
 
-
-        loop -i 1
-
-            $sleep
-
-            change IP
-            openNotification
-            $sleep
-            wait -text 'Wi-fi,Bật' -timeout 5000 -thenClick true -then 'sleep -t 7000' -varPosX x -varPosY y -else {wait -text 'Wi-Fi,On' -timeout 5000 -thenClick true -then 'sleep -t 7000' -varPosX x -varPosY y}
-            $sleep
-            wait -text 'Wi-fi,Tắt' -timeout 5000 -thenClick true -then 'sleep -t 8000' -else {click -x 'getVar -name x' -y 'getVar -name y'} -clickDelay 3000
-            $sleep
-            back
-            sleep -t 10000
-            $sleep
-            wait -id 'com.kiwibrowser.browser:id/menu_button' -thenClick true -timeout 5000 -then {wait -text 'Làm mới' -exactly true -timeout 5000 -thenClick true -clickDelay 2000 -else `wait -text  'Refresh' -exactly true -timeout 5000 -thenClick true -clickDelay 2000`}
-            $sleep
-            $sleep
-            $sleep
-            $sleep
-        endLoop
 
         //wait -text "Tztool1" -exactly true -timeout 15000 -else {$scrollUp}
         $sleep
@@ -78,8 +80,12 @@ Sequence
 
             //$sleep
         //endLoop
-        
-        wait -text "Tztool1" -timeout 5000 -varText number1 -then {var -name loaddone -value true}
+        toast -text "Đang tìm 4 nút"
+        wait -text "Tztool1" -timeout 20000 -varText number1 -then {var -name loaddone -value true} -else {$scrollUp}
+        if -getVar loaddone -equal false -then `wait -id 'com.kiwibrowser.browser:id/menu_button' -thenClick true -timeout 5000 -then {wait -text 'Làm mới' -exactly true -timeout 5000 -thenClick true -clickDelay 2000 -else "wait -text  'Refresh' -exactly true -timeout 5000 -thenClick true -clickDelay 2000"}`
+        if -getVar loaddone -equal false -then {sleep -t 10000}
+        if -getVar loaddone -equal false -then `wait -text "Tztool1" -timeout 20000 -varText number1 -then {var -name loaddone -value true}`
+
         if -getVar loaddone -equal false -then {loopContinue}
         wait -text "Tztool1" -exactly true -timeout 3000 -varText number1
         wait -text "Tztool2" -exactly true -timeout 3000 -varText number2
@@ -92,8 +98,8 @@ Sequence
         wait -text "Tztool1" -exactly true -timeout 3000 -varText number1 -thenClick true
         sleep -t 5000
 
-        wait -text 'Xác minh bạn là con người' -timeout 20000 -thenClick true -plusX 'random -from 1 -to 10' -plusY 'random -from 1 -to 10'
-        wait -text 'Verify you are human' -exactly true -timeout 5000 -thenClick true -plusX 'random -from 1 -to 10' -plusY 'random -from 1 -to 10'
+        wait -text 'Xác minh bạn là con người' -exactly true -timeout 5000 -thenClick true -plusX 'random -from 1 -to 7' -plusY 'random -from 1 -to 7' -clickDelay 500
+        wait -text 'Verify you are human' -exactly true -timeout 5000 -thenClick true -plusX 'random -from 1 -to 7' -plusY 'random -from 1 -to 7' -clickDelay 500
 
         wait -text "Tztool1" -exactly true -timeout 3000 -varText number11
         toast -text '${number11}'
